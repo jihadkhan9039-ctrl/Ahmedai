@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#000814" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Ahmed AI</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- BOOT SCREEN -->
+<div id="boot-screen">
+  <div class="boot-core">
+    <div class="boot-ring r1"></div>
+    <div class="boot-ring r2"></div>
+    <div class="boot-ring r3"></div>
+    <div class="boot-logo">
+      <span class="boot-a">A</span>
+    </div>
+  </div>
+  <div class="boot-text">
+    <div class="boot-name">AHMED AI</div>
+    <div class="boot-status" id="boot-status">Initializing systems...</div>
+    <div class="boot-bar"><div class="boot-fill" id="boot-fill"></div></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" style="display:none;">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="icon-btn" id="menu-btn" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="topbar-title">
+      <span class="title-ahmed">AHMED</span>
+      <span class="title-ai"> AI</span>
+    </div>
+    <div class="topbar-status">
+      <div class="status-dot"></div>
+      <span>ONLINE</span>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-avatar">
+        <div class="av-ring"></div>
+        <span>A</span>
+      </div>
+      <div>
+        <div class="sidebar-name">Ahmed AI</div>
+        <div class="sidebar-sub">v2.0 · Active</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-mode="chat"><span class="nav-icon">💬</span> Chat</button>
+      <button class="nav-item" data-mode="study"><span class="nav-icon">📚</span> Study Assistant</button>
+      <button class="nav-item" data-mode="code"><span class="nav-icon">💻</span> Code Assistant</button>
+      <button class="nav-item" data-mode="research"><span class="nav-icon">🔬</span> Research</button>
+      <button class="nav-item" data-mode="creative"><span class="nav-icon">✍️</span> Creative</button>
+      <button class="nav-item" data-mode="translate"><span class="nav-icon">🌐</span> Translate</button>
+      <button class="nav-item" data-mode="analyze"><span class="nav-icon">📊</span> Analyze</button>
+      <button class="nav-item" data-mode="productivity"><span class="nav-icon">📋</span> Productivity</button>
+      <button class="nav-item" data-mode="media"><span class="nav-icon">🎬</span> Media Guide</button>
+      <button class="nav-item" data-mode="gaming"><span class="nav-icon">🎮</span> Gaming</button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="nav-item" id="clear-chat-btn"><span class="nav-icon">🗑️</span> Clear History</button>
+      <div class="sidebar-version">Ahmed AI © 2025</div>
+    </div>
+  </aside>
+  <div id="overlay" class="overlay"></div>
+
+  <!-- CHAT AREA -->
+  <main class="chat-area" id="chat-area">
+    <!-- Mode Banner -->
+    <div class="mode-banner" id="mode-banner">
+      <span id="mode-icon">💬</span>
+      <span id="mode-label">Chat Mode</span>
+    </div>
+
+    <!-- Messages -->
+    <div class="messages" id="messages"></div>
+
+    <!-- Typing indicator -->
+    <div class="typing-indicator" id="typing" style="display:none;">
+      <div class="typing-avatar">A</div>
+      <div class="typing-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="typing-text">Ahmed AI is thinking...</span>
+    </div>
+  </main>
+
+  <!-- QUICK TOOLS -->
+  <div class="quick-tools" id="quick-tools">
+    <button class="qt-btn" id="qt-analyze-img" title="Analyze Image">📷</button>
+    <button class="qt-btn" id="qt-translate" title="Quick Translate">🌐</button>
+    <button class="qt-btn" id="qt-note" title="Quick Note">📝</button>
+    <button class="qt-btn" id="qt-apps" title="Open App">📱</button>
+  </div>
+
+  <!-- INPUT AREA -->
+  <footer class="input-area">
+    <div class="input-row">
+      <button class="attach-btn" id="attach-btn" title="Attach file">
+        <svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <input type="file" id="file-input" accept="image/*,.pdf" style="display:none;" />
+      <div class="textarea-wrap">
+        <textarea id="user-input" placeholder="Message Ahmed AI..." rows="1" maxlength="4000"></textarea>
+      </div>
+      <button class="voice-btn" id="voice-btn" title="Voice input" aria-label="Voice input">
+        <svg class="mic-icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        <div class="voice-wave" id="voice-wave"></div>
+      </button>
+      <button class="send-btn" id="send-btn" aria-label="Send">
+        <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="input-meta">
+      <span id="lang-indicator">🌐 Auto-detect</span>
+      <span id="char-count">0 / 4000</span>
+    </div>
+  </footer>
+
+  <!-- APP OPENER MODAL -->
+  <div class="modal" id="apps-modal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>📱 Open App</span>
+        <button class="modal-close" id="apps-close">✕</button>
+      </div>
+      <div class="apps-grid">
+        <a class="app-item" href="intent://camera#Intent;scheme=android-app;package=com.android.camera;end">📷<span>Camera</span></a>
+        <a class="app-item" href="intent://gallery#Intent;scheme=android-app;package=com.android.gallery;end">🖼️<span>Gallery</span></a>
+        <a class="app-item" href="googlechrome://navigate?url=https://google.com">🌐<span>Chrome</span></a>
+        <a class="app-item" href="https://youtube.com">▶️<span>YouTube</span></a>
+        <a class="app-item" href="intent://settings#Intent;scheme=android-app;package=com.android.settings;end">⚙️<span>Settings</span></a>
+        <a class="app-item" href="intent://calculator#Intent;scheme=android-app;package=com.android.calculator2;end">🔢<span>Calculator</span></a>
+        <a class="app-item" href="tel:">📞<span>Dialer</span></a>
+        <a class="app-item" href="sms:">💬<span>Messages</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTE MODAL -->
+  <div class="modal" id="note-modal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>📝 Quick Note</span>
+        <button class="modal-close" id="note-close">✕</button>
+      </div>
+      <textarea id="note-text" placeholder="Type your note..." rows="6"></textarea>
+      <div class="modal-actions">
+        <button class="action-btn" id="note-save">Save Note</button>
+        <button class="action-btn secondary" id="note-send-ai">Ask AI about this</button>
+      </div>
+      <div id="saved-notes"></div>
+    </div>
+  </div>
+
+  <!-- IMAGE ANALYSIS MODAL -->
+  <div class="modal" id="img-modal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>📷 Analyze Image</span>
+        <button class="modal-close" id="img-close">✕</button>
+      </div>
+      <div class="img-drop-zone" id="img-drop">
+        <span>📷 Tap to select image or screenshot</span>
+        <input type="file" id="img-file" accept="image/*" />
+      </div>
+      <img id="img-preview" style="display:none;max-width:100%;border-radius:12px;margin-top:10px;" />
+      <textarea id="img-question" placeholder="What do you want to know about this image?" rows="3"></textarea>
+      <button class="action-btn" id="img-analyze-btn">Analyze with Ahmed AI</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
